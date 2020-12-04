@@ -9,6 +9,7 @@ class Input extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    this.props.onCreate(this.state);
   };
 
   handleCancle = () => {
