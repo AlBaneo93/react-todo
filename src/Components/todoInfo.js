@@ -5,7 +5,7 @@ class Todo extends Component {
     content: '',
     editting: false,
   };
-  create = () => {};
+  create = () => { };
   toggle = () => {
     const { editting } = this.state;
     this.setState({ editting: !editting });
@@ -16,11 +16,14 @@ class Todo extends Component {
 
   render() {
     const todo_style = { border: '1px solid black', padding: '8px', margin: '8px' };
-    // const { info } = this.props;
+    const { content } = this.props.todo;
     return (
       <div style={todo_style}>
-        <input value={this.state.content} />
-        {/* 이전 내용으로 돌리고, editing 값도 돌린다 */}
+        {content}
+        {/*
+        이전 내용으로 돌리고, editing 값도 돌린다
+        조건에 맞춰서 조건 출력
+        */}
         <button onClick={this.cancle}>취소</button>
         <button onClick={this.toggle}>확인</button>
 
