@@ -2,35 +2,58 @@ import React, { Component } from 'react';
 
 class Todo extends Component {
   state = {
-    content: '',
-    editting: false,
+    todo: {
+      id: 0,
+      content: '',
+    },
+    editing: false,
+    readonly: true
   };
-  create = () => { };
   toggle = () => {
-    const { editting } = this.state;
-    this.setState({ editting: !editting });
+    const { editing, readonly } = this.state;
+    this.setState({ editing: !editing, readonly: !readonly });
   };
-  cancle = () => {
-    console.log('cancle');
-  };
+  // cancle = () => {
+  //   const { editing, readonly } = this.state;
+  //   this.setState({ editing: !editing, readonly: !readonly }) // this.toggle()을 부를 순 없나??
+  // };
+
+  handleRemove = () => {
+    const { onRemove, todo } = this.props;
+    onRemove({ id: todo.id, content: todo.content })
+  }
+
+  handleUpdate = () => {
+    console.log("update")
+
+    const { todo, onUpdate } = this.props
+    onUpdate({
+      id: todo.id, content: todo.content
+    })
+  }
 
   render() {
-    const todo_style = { border: '1px solid black', padding: '8px', margin: '8px' };
+    // const todo_style = { border: '1px solid black', padding: '8px', margin: '8px' };
     const { content } = this.props.todo;
-    return (
-      <div style={todo_style}>
-        {content}
-        {/*
-        이전 내용으로 돌리고, editing 값도 돌린다
-        조건에 맞춰서 조건 출력
-        */}
-        <button onClick={this.cancle}>취소</button>
-        <button onClick={this.toggle}>확인</button>
+    if (this.state.editing) {
+      return (
+        <div >
+          <input value={content} name='content' disabled={this.state.readonly} />
+          <button onClick={this.toggle}>취소</button>
+          <button onClick={this.handleUpdate}>확인</button>
+        </div>
+      );
+    } else {
 
-        <button onClick={this.toggle}>수정</button>
-        <button onClick={this.complete}>완료</button>
-      </div>
-    );
+      return (
+        <div>
+          {/* <input value={content} name='content' disabled={this.state.readonly} /> */}
+          <h3>{content}</h3>
+          <button onClick={this.toggle}>수정</button>
+          <button onClick={this.handleRemove}>삭제</button>
+        </div>
+      )
+    }
   }
 }
 

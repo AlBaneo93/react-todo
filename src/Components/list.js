@@ -4,8 +4,8 @@ import TodoInfo from './todoInfo'
 
 class todoList extends Component {
   render() {
-    const { data } = this.props;
-    const list = data.map(info => <TodoInfo todo={info} />);
+    const { data, onRemove } = this.props;
+    const list = data.map(info => <TodoInfo todo={info} onRemove={onRemove} onUpdate={this.todoUpdate} />);
     return <div>{list}</div>;
   }
 }
