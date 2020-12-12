@@ -25,20 +25,35 @@ class Todo extends Component {
 
   handleUpdate = () => {
     console.log("update")
-
     const { todo, onUpdate } = this.props
-    onUpdate({
-      id: todo.id, content: todo.content
+    onUpdate({ todo })
+  }
+
+  changeContent = (e) => {
+    console.log("change")
+    const { todo } = this.state;
+    this.setState({
+      todo: {
+        id: todo.id,
+        content: e.target.value
+      },
+      ...this.state,
     })
   }
 
   render() {
     // const todo_style = { border: '1px solid black', padding: '8px', margin: '8px' };
     const { content } = this.props.todo;
+    this.setState({
+      todo: {
+        content: content
+      }, editing: !this.state.editing, readonly: !this.state.readonly
+    })
     if (this.state.editing) {
+      const { todo } = this.state;
       return (
         <div >
-          <input value={content} name='content' disabled={this.state.readonly} />
+          <input value={todo.content} name='content' onChange={this.changeContent} />
           <button onClick={this.toggle}>취소</button>
           <button onClick={this.handleUpdate}>확인</button>
         </div>

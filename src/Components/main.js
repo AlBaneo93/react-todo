@@ -34,8 +34,10 @@ class main extends Component {
     // })
   }
 
-  todoUpdate = (data) => {
-    console.log('update: ' + data.id)
+  todoUpdate = ({ todo }) => {
+    console.log('main update fn: ')
+    // list 돌면서 id가 일치하는 객체 찾아서 내용 업데이트
+    // console.log(data.content)
 
   }
 
