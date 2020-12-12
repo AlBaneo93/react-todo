@@ -5,11 +5,17 @@ class searchTodo extends Component {
     state = {
         keyword: ''
     }
+
+    handleChange = () => {
+        const { onChange } = this.props
+        onChange(this.state.keyword)
+    }
+
     render() {
-        const { onChange } = this.props;
+        // const { onChange } = this.props;
         return (
             <div>
-                <input value={this.state.keyword} onChange={onChange} placeholder='Todo' />
+                <input value={this.state.keyword} onChange={this.handleChange} placeholder='Todo' />
             </div>
         )
     }

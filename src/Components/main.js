@@ -19,30 +19,36 @@ class main extends Component {
 
     const { todos } = this.state;
     // 새로 추가된 내용을, 원래 있던 목록 리스트에 넣기
-    // TODO  cookie에도 넣기
     this.setState({ todos: todos.concat({ id: this.id++, ...data }) });
+    console.clear();
+    console.log('whole data :', todos)
+    // 쿠키에 현재 데이터를 삽입해 저장
+    document.cookie('react-todo', todos)
   };
 
   //
   todoRemove = (data) => {
-    // const { todos } = this.state;
+    const { todos } = this.state;
     console.log('delete: ' + data.id)
 
-    // // id와 같은 id를 갖고있는 요소를 찾아서 삭제 후 리턴 filter 사용
-    // this.setState({
-    //   todos: todos.filter()
-    // })
+    // filter : 조건이 참인것만 모아서 새로운 배열을 만든다
+    // 지우려는 데이터의 아이디와 다른 아이디를 가진 객체를 모아 리스트를 만든다
+    this.setState({
+      todos: todos.filter(obj => (obj.id !== data.id))
+    })
   }
 
   todoUpdate = ({ todo }) => {
     console.log('main update fn: ')
     // list 돌면서 id가 일치하는 객체 찾아서 내용 업데이트
     // console.log(data.content)
+    const { todos } = this.state
 
   }
 
   todoSearch = (data) => {
     console.log('Search')
+    // 원본 데이터 유지, 새로 찾으려는 데이터만 찾아서 보여줘야함
   }
 
   render() {
@@ -51,7 +57,7 @@ class main extends Component {
     if (todos.length <= 0) {
       return (
         <div style={style}>
-          <Search onChange={this.todo_style} />
+          <Search onChange={this.todoSearch} />
           <hr />
           <h2>할 일 목록이 없습니다. 추가해보세요!</h2>
           <hr />
@@ -62,7 +68,7 @@ class main extends Component {
     // const counter = todos.length; TODO 카운터도 있으면 좋겠다
     return (
       <div style={style}>
-        <Search onChange={this.todo_style} />
+        <Search onChange={this.todoSearch} />
         {/* <fragment>
           Count : {{ counter }}
         </fragment> */}

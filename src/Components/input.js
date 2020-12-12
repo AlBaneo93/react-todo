@@ -12,7 +12,11 @@ class Input extends Component {
   handleSubmit = e => {
     e.preventDefault();
     // main에서 넘겨준 todoCreate함수
-    this.props.onCreate(this.state);
+    const { onCreate } = this.props
+    // input에서 굳이 id를 만들어줄 필요는 없다
+    // this.setState({ id: id, ...this.state })
+    // console.log('input.js - validate input', this.state)
+    onCreate(this.state);
     this.setState({ content: '' })
   };
 
@@ -32,7 +36,7 @@ class Input extends Component {
         <form onSubmit={this.handleSubmit}>
           <input value={this.state.content} name="content" placeholder="할 일" onChange={this.handleChange} />
           <button onClick={this.handleCancle}>취소</button>
-          <button type="submit" onClick={this.handleCreate}>
+          <button type="submit"> {/* form submit 이벤트를 가로막고 handleSubmit함수 실행 */}
             확인
           </button>
         </form>
