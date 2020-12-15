@@ -9,21 +9,21 @@ class main extends Component {
     todos: [],
   };
 
+  // REVIEW 쿠키나 리스트 업데이트가 실시간으로 이루어지지 않는다.
   todoCreate = data => {
+
     // 입력값 검증
-    if (data.content === '') {
+    if (data === '') {
       alert("Content can't be empty")
       console.warn("content is empty")
       return
     }
-
     const { todos } = this.state;
     // 새로 추가된 내용을, 원래 있던 목록 리스트에 넣기
-    this.setState({ todos: todos.concat({ id: this.id++, ...data }) });
-    console.clear();
-    console.log('whole data :', todos)
+    this.setState({ todos: todos.concat({ id: this.id++, content: data }) });
+    // console.clear();
     // 쿠키에 현재 데이터를 삽입해 저장
-    document.cookie('react-todo', todos)
+    // document.cookie = "react-todo =" + JSON.stringify(todos)
   };
 
   //
@@ -42,7 +42,7 @@ class main extends Component {
     console.log('main update fn: ')
     // list 돌면서 id가 일치하는 객체 찾아서 내용 업데이트
     // console.log(data.content)
-    const { todos } = this.state
+    // const { todos } = this.state
 
   }
 

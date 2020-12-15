@@ -44,11 +44,11 @@ class Todo extends Component {
   render() {
     // const todo_style = { border: '1px solid black', padding: '8px', margin: '8px' };
     const { content } = this.props.todo;
-    this.setState({
-      todo: {
-        content: content
-      }, editing: !this.state.editing, readonly: !this.state.readonly
-    })
+    // this.setState({
+    //   todo: {
+    //     content: content
+    //   }, editing: !this.state.editing, readonly: !this.state.readonly
+    // })
     if (this.state.editing) {
       const { todo } = this.state;
       return (

@@ -12,11 +12,11 @@ class Input extends Component {
   handleSubmit = e => {
     e.preventDefault();
     // main에서 넘겨준 todoCreate함수
-    const { onCreate } = this.props
+    const { onCreate, } = this.props
     // input에서 굳이 id를 만들어줄 필요는 없다
     // this.setState({ id: id, ...this.state })
     // console.log('input.js - validate input', this.state)
-    onCreate(this.state);
+    onCreate(this.state.content);
     this.setState({ content: '' })
   };
 
